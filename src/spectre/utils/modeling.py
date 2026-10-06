@@ -74,7 +74,27 @@ def load_checkpoint(
             revision = unquote(parts[3])
             filename = '/'.join(parts[4:])
         local_path = hf_hub_download(repo_id=repo_id, filename=filename, revision=revision)
-        return load_state_dict_from_file(local_path, map_location=map_location)
+        # Hugging Face Hub >=1.x defaults safe=True (safetensors-only). SPECTRE publishes
+        # pickle .pt checkpoints; pass safe=False so those still load. weights_only=True
+        # still restricts the unpickler to tensors when torch supports it.
+        try:
+            return load_state_dict_from_file(
+                local_path, map_location=map_location, safe=False, weights_only=True,
+            )
+        except TypeError:
+            # Older huggingface_hub without the `safe` kwarg.
+            return load_state_dict_from_file(local_path, map_location=map_location)
+        except Exception:
+            warnings.warn(
+                f"Could not load {local_path} with weights_only=True, retrying with "
+                f"weights_only=False. This executes arbitrary code from the checkpoint - "
+                f"only do this for files you trust.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+            return load_state_dict_from_file(
+                local_path, map_location=map_location, safe=False, weights_only=False,
+            )
 
     if _is_url(checkpoint_path_or_url):
         if verbose:

@@ -1,0 +1,41 @@
+{
+  "label": "box-only / non-target (not Xeon/Arc iron)",
+  "scan": "artifacts/sample/synthetic_ct.nii.gz",
+  "grid": [
+    1,
+    1,
+    1
+  ],
+  "torch_tokens_shape": [
+    1,
+    513,
+    1080
+  ],
+  "full_model_features_shape": [
+    2,
+    1080
+  ],
+  "note": "Agreement is on ViT backbone.forward_features tokens; full-model cls is torch reference only.",
+  "ort_vs_torch": {
+    "cosine_all": 0.9999999999572374,
+    "cosine_cls": 0.9999999999974377,
+    "max_abs": 0.00018499791622161865
+  },
+  "openvino_cpu_fp32": {
+    "ir": "artifacts/ov/spectre_vit_backbone_torch.xml",
+    "devices": [
+      "CPU"
+    ],
+    "cosine_all_tokens": 0.9999999999931397,
+    "cosine_cls_token": 0.9999999999985931,
+    "cosine_mean_patch_tokens": 0.999999999999504,
+    "max_abs_diff": 4.602968692779541e-05,
+    "mse": 6.3342321839077176e-12
+  },
+  "openvino_cpu_default_precision": {
+    "cosine_all_tokens": 0.7593637997505895,
+    "cosine_cls_token": 0.7868741762404015,
+    "max_abs_diff": 4.098833084106445,
+    "warning": "Default OV CPU precision may use BF16 and drop cosine << 1; use FP32 hint."
+  }
+}
