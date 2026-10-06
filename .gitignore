@@ -198,3 +198,8 @@ hf_export/config.json
 hf_export/README.md
 hf_export/LICENSE
 hf_export/LICENSE_MODELS
+# OpenVINO / CPU smoke local artifacts (regenerable; may contain NC weight-derived IR)
+artifacts/
+.venv/
+*.onnx
+*.onnx.data

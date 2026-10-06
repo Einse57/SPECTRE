@@ -1,0 +1,23 @@
+# CPU-only pin set for SPECTRE embed smoke + OpenVINO export (box / Xeon path).
+# Install:  python -m venv .venv && source .venv/bin/activate
+#           pip install -U pip wheel
+#           pip install -r requirements-cpu-openvino.txt
+#           pip install -e ".[inference]"
+#
+# Torch/vision CPU wheels from the PyTorch CPU index:
+#   pip install torch==2.10.0+cpu torchvision==0.25.0+cpu \
+#       --index-url https://download.pytorch.org/whl/cpu
+
+torch==2.10.0+cpu
+torchvision==0.25.0+cpu
+numpy==2.5.2
+timm==1.0.30
+transformers==5.18.0
+huggingface_hub==1.33.0
+loralib==0.1.2
+nibabel==5.4.2
+monai==1.6.1
+onnx==1.23.2
+onnxscript==0.7.2
+onnxruntime==1.30.0
+openvino==2026.4.1

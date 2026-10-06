@@ -1,0 +1,32 @@
+{
+  "label": "box-only / non-target (not Xeon/Arc iron)",
+  "command": "spectre embed artifacts/sample/synthetic_ct.nii.gz -o artifacts/embeddings --device cpu --max-crops-per-forward 1 --overwrite --quiet",
+  "device": "cpu",
+  "scan": "artifacts/sample/synthetic_ct.nii.gz",
+  "runs": [
+    {
+      "repeat": 0,
+      "exit": 0,
+      "wall_s": 11.99834576899957,
+      "peak_rss_mb": 2973.62109375,
+      "stdout_tail": "Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"
+    },
+    {
+      "repeat": 1,
+      "exit": 0,
+      "wall_s": 12.455941195001287,
+      "peak_rss_mb": 2973.69140625,
+      "stdout_tail": "Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"
+    }
+  ],
+  "summary": {
+    "n_ok": 2,
+    "latency_s_mean": 12.227143482000429,
+    "latency_s_min": 11.99834576899957,
+    "peak_rss_mb_max": 2973.69140625
+  },
+  "host": {
+    "platform": "linux",
+    "cpu_count": 8
+  }
+}
